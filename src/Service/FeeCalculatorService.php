@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Loan;
 use App\Entity\LoanProposal;
 use App\Interface\FeeCalculator;
@@ -24,9 +23,19 @@ class FeeCalculatorService implements FeeCalculator
             $secondLoan->getFee() - $firstLoan->getFee() != 0
         ){
             $a = ($secondLoan->getFee() - $firstLoan->getFee())/($secondLoan->getAmount() - $firstLoan->getAmount());
-            return $firstLoan->getFee() + ($a * ($loanProposal->getAmount() - $firstLoan->getAmount()));
+            $fee = $firstLoan->getFee() + ($a * ($loanProposal->getAmount() - $firstLoan->getAmount()));
+            return (float) $this->round($fee, $loanProposal);
         }
 
         return (float) $firstLoan->getFee();
+    }
+
+    private function round(int $fee, LoanProposal $loanProposal): int
+    {
+        $mod = ($loanProposal->getAmount() + $fee) % 5;
+        if ($mod === 0){
+            return $fee;
+        }
+        return $fee + 5 - $mod;
     }
 }

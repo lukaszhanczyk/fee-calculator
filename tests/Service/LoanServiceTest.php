@@ -94,9 +94,9 @@ class LoanServiceTest extends TestCase
 ////        $this->assertEquals($exampleEntity, $result);
 ////    }
 //
-//    public function testFindClosestMethod(): void
-//    {
+    public function testFindClosestMethod(): void
+    {
 //        print($this->loanService->findClosest(1200));
-//        $this->assertTrue(true);
-//    }
+        $this->assertTrue(true);
+    }
 }

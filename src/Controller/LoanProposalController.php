@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\LoanProposal;
+use App\Form\LoanProposalFormType;
 use App\Service\LoanProposalService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,15 +23,24 @@ class LoanProposalController extends AbstractController
         ]);
     }
 
-    #[Route('/loan/proposal/calculate', name: 'app_loan_calculate', methods: ['POST'])]
+    #[Route('/loan/proposal/store', name: 'app_loan_proposal_store', methods: ['GET', 'POST'])]
     public function store(Request $request): Response
     {
         $loanProposal = new LoanProposal();
 
-        $loans = $this->loanProposalService->store(1000, 24);
+        $form = $this->createForm(LoanProposalFormType::class, $loanProposal);
 
-        return $this->json($loans);
-//        return $this->render('loan/index.html.twig', [
-//            'controller_name' => 'LoanController',
-//        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $loanProposal = $form->getData();
+            $this->loanProposalService->store($loanProposal);
+
+            return $this->redirectToRoute('app_loan_proposal');
+        }
+
+        return $this->render('loan_proposal/new.html.twig', [
+            'form' => $form,
+        ]);
+
     }}
