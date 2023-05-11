@@ -7,7 +7,9 @@ use App\Entity\LoanProposal;
 interface FeeCalculator
 {
     /**
+     * @param array $loans
+     * @param LoanProposal $loanProposal
      * @return float The calculated total fee.
      */
-    public function calculate(LoanProposal $application): float;
+    public function calculate(array $loans, LoanProposal $loanProposal): float;
 }
