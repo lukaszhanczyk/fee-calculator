@@ -29,7 +29,10 @@ class LoanProposalFormType extends AbstractType
                 'required' => true,
                 'multiple' => false,
                 'expanded' => false,
-                'choices'  => TermEnum::toArray()
+                'choices'  => TermEnum::toArray(),
+                'row_attr' => [
+                    'class' => 'input-group mb-3',
+                ],
             ])
             ->add('Submit', SubmitType::class)
         ;

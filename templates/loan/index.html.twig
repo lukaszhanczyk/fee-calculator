@@ -8,29 +8,35 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h3>Loans</h3>
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <h3 class="mt-2">Loans</h3>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Amount</th>
-            <th>Term</th>
-            <th>Fee</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
+            <div class="row">
+                <div class="col4">
+                    <a href="{{ path('app') }}" class="btn btn-primary btn-lg square mt-3 mb-3 mr-2" role="button">Back</a>
+                </div>
+            </div>
 
-    {% for loan in loans %}
-        <tr>
-            <td>{{ loan.id|e }}</td>
-            <td>{{ loan.amount|e }}</td>
-            <td>{{ loan.term|e }}</td>
-            <td>{{ loan.fee|e }}</td>
-            <td>Edit</td>
-            <td>Delete</td>
-        </tr>
-    {% endfor %}
-    </table>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Amount</th>
+                    <th>Term</th>
+                    <th>Fee</th>
+                </tr>
+
+            {% for loan in loans %}
+                <tr>
+                    <td>{{ loan.id|e }}</td>
+                    <td>{{ loan.amount|e }}</td>
+                    <td>{{ loan.term|e }}</td>
+                    <td>{{ loan.fee|e }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}

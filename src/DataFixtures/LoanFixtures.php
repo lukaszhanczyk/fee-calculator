@@ -11,7 +11,6 @@ class LoanFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-
         ### Term 12 ###
         $loan = new Loan();
         $loan->setAmount(1000);
