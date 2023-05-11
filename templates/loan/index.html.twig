@@ -9,12 +9,28 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h3>Loans</h3>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/src/Controller/LoanController.php'|file_link(0) }}">src/Controller/LoanController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/templates/loan/index.html.twig'|file_link(0) }}">templates/loan/index.html.twig</a></code></li>
-    </ul>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Term</th>
+            <th>Fee</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+
+    {% for loan in loans %}
+        <tr>
+            <td>{{ loan.id|e }}</td>
+            <td>{{ loan.amount|e }}</td>
+            <td>{{ loan.term|e }}</td>
+            <td>{{ loan.fee|e }}</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+    {% endfor %}
+    </table>
 </div>
 {% endblock %}

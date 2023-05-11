@@ -17,9 +17,8 @@ class LoanController extends AbstractController
     {
         $loans = $this->loanService->findAll();
 
-//        return $this->json($loans);
         return $this->render('loan/index.html.twig', [
-            'controller_name' => 'LoanController',
+            'loans' => $loans,
         ]);
     }
 

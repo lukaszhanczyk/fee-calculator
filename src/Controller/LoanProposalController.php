@@ -18,8 +18,10 @@ class LoanProposalController extends AbstractController
     #[Route('/loan/proposal', name: 'app_loan_proposal')]
     public function index(): Response
     {
+        $loanProposals = $this->loanProposalService->findAll();
+
         return $this->render('loan_proposal/index.html.twig', [
-            'controller_name' => 'LoanProposalController',
+            'loan_proposals' => $loanProposals,
         ]);
     }
 
@@ -32,7 +34,6 @@ class LoanProposalController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $loanProposal = $form->getData();
             $this->loanProposalService->store($loanProposal);
 
@@ -43,4 +44,12 @@ class LoanProposalController extends AbstractController
             'form' => $form,
         ]);
 
-    }}
+    }
+
+    #[Route('/loan/proposal/{id}', name: 'app_loan_proposal_delete')]
+    public function delete(int $id): Response
+    {
+        $this->loanProposalService->delete($id);
+        return $this->redirectToRoute('app_loan_proposal');
+    }
+}

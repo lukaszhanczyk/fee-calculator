@@ -15,7 +15,6 @@ class FeeCalculatorServiceTest extends KernelTestCase
     }
     public function testCalculate(): void
     {
-
         $loan1 = new Loan();
         $loan2 = new Loan();
 
@@ -28,7 +27,5 @@ class FeeCalculatorServiceTest extends KernelTestCase
         $loanProposal->setAmount(1200);
 
         $this->assertIsFloat($this->feeCalculatorService->calculate([$loan1, $loan2], $loanProposal));
-        // $routerService = static::getContainer()->get('router');
-        // $myCustomService = static::getContainer()->get(CustomService::class);
     }
 }
