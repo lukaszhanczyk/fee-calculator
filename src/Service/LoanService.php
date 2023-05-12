@@ -16,7 +16,15 @@ class LoanService
 
     public function findAll(): array
     {
-        return $this->loanRepository->findAll();
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        $query = $queryBuilder->select('loan')
+            ->from(Loan::class, 'loan')
+            ->addOrderBy('loan.term', 'ASC')
+            ->addOrderBy('loan.amount', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
     }
 
     public function findOne(int $id): Loan
@@ -58,4 +66,18 @@ class LoanService
 
         return [...$firstValue, ...$secondValue];
     }
+
+    public function store(Loan $loan): void
+    {
+        $this->entityManager->persist($loan);
+        $this->entityManager->flush();
+    }
+
+    public function delete(int $id): void
+    {
+        $loan = $this->findOne($id);
+        $this->entityManager->remove($loan);
+        $this->entityManager->flush();
+    }
+
 }

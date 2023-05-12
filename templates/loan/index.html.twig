@@ -3,10 +3,6 @@
 {% block title %}Hello LoanController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
@@ -14,6 +10,9 @@
             <h3 class="mt-2">Loans</h3>
 
             <div class="row">
+                <div class="col4">
+                    <a href="{{ path('app_loan_store') }}" class="btn btn-primary btn-lg square mt-3 mb-3 mr-2" role="button">Add new</a>
+                </div>
                 <div class="col4">
                     <a href="{{ path('app') }}" class="btn btn-primary btn-lg square mt-3 mb-3 mr-2" role="button">Back</a>
                 </div>
@@ -25,6 +24,8 @@
                     <th>Amount</th>
                     <th>Term</th>
                     <th>Fee</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
 
             {% for loan in loans %}
@@ -33,6 +34,8 @@
                     <td>{{ loan.amount|e }}</td>
                     <td>{{ loan.term|e }}</td>
                     <td>{{ loan.fee|e }}</td>
+                    <td><a href="{{ path('app_loan_edit', {'id': loan.id}) }}" class="btn btn-success square" role="button">Edit</a></td>
+                    <td><a href="{{ path('app_loan_delete', {'id': loan.id}) }}" class="btn btn-danger square" role="button">Delete</a></td>
                 </tr>
             {% endfor %}
             </table>

@@ -13,4 +13,5 @@ class LoanControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+
 }

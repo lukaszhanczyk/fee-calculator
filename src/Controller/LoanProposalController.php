@@ -46,7 +46,7 @@ class LoanProposalController extends AbstractController
 
     }
 
-    #[Route('/loan/proposal/{id}', name: 'app_loan_proposal_delete')]
+    #[Route('/loan/proposal/delete{id}', name: 'app_loan_proposal_delete')]
     public function delete(int $id): Response
     {
         $this->loanProposalService->delete($id);
